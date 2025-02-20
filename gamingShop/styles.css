@@ -1,0 +1,125 @@
+* {
+    transition: all 0.2s ease;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+  --body-color: white;
+}
+
+body {
+  font-family: tahoma;
+}
+
+main {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.loader {
+    width: 40px;
+    scale: 2;
+    position: absolute;
+    left: calc(50% - 40px);
+    top: calc(40vh - 40px);
+    aspect-ratio: 1;
+     --c: linear-gradient(#000 0 0);
+     --m: radial-gradient(farthest-side,#000 92%,#0000);
+    background: 
+      var(--m) center               /12px 12px,
+      var(--c) left 50% top    -20px/8px 16px, 
+      var(--c) left 50% bottom -20px/8px 16px, 
+      var(--c) top  50% left   -20px/16px 8px, 
+      var(--c) top  50% right  -20px/16px 8px;
+    background-repeat: no-repeat;
+    animation: 
+      l18-1 1.5s infinite,
+      l18-2 1.5s infinite;
+  }
+  @keyframes l18-1 {
+    30%,
+    70% {background-position: 
+          center,
+          left 50% top    calc(50% - 8px),
+          left 50% bottom calc(50% - 8px),
+          top  50% left   calc(50% - 8px),
+          top  50% right  calc(50% - 8px)}
+  }
+  @keyframes l18-2 {
+    0%,40%   {transform: rotate(0)}
+    60%,100% {transform: rotate(90deg)}
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideIntoPlace {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(50px);
+    }
+  }
+
+  .sildeIntoPlace {
+    animation: slideIntoPlace 0.4s ease;
+  }
+
+  .fadeOutSlow {
+    animation: fadeOut 0.5s ease-in-out forwards;
+  }
+
+  .fadeOutFast {
+    animation: fadeOut 0.3s ease;
+  }
+
+  .fadeInSlow {
+    animation: fadeIn 0.5s ease-in-out forwards
+  }
+
+  .fadeInFast {
+    animation: fadeIn 0.3s ease;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  #check-internet-p {
+    position: absolute;
+    font-weight: bold;
+    width: 250px;
+    left: calc(50vw - 145px);
+    top: calc(50Vh - 50px) 
+  }
+
+  #theme-btn {
+
+  }
+
+  @media (min-width: 1000px) {
+    
+  }
