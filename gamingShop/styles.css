@@ -5,11 +5,14 @@
 }
 
 :root {
-  --body-color: white;
+  --body-color: ;
+  --text-color: ;
+  --special-color: ;
 }
 
 body {
   font-family: tahoma;
+  background-color: var(--body-color)
 }
 
 main {
@@ -28,8 +31,8 @@ main {
     left: calc(50% - 40px);
     top: calc(40vh - 40px);
     aspect-ratio: 1;
-     --c: linear-gradient(#000 0 0);
-     --m: radial-gradient(farthest-side,#000 92%,#0000);
+     --c: linear-gradient(var(--text-color) 0 0);
+     --m: radial-gradient(farthest-side,var(--text-color) 92%,var(--special-color));
     background: 
       var(--m) center               /12px 12px,
       var(--c) left 50% top    -20px/8px 16px, 

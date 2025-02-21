@@ -1,7 +1,13 @@
+const allElements = document.querySelectorAll("*");
 const main = document.querySelector("main");
 const loaderDiv = document.querySelector("#loader-div");
+
 const checkInternetPEl = document.getElementById("check-internet-p");
-const sloganPEl = document.getElementById("slogan");
+const sloganH1El = document.getElementById("slogan");
+let currentLanIsEn = true;
+
+const changeThemeBtn = document.getElementById("theme-btn");
+let themeIsLight = false;
 
 const backgroundImages = [
    {
@@ -27,18 +33,34 @@ const text = [
 
 const setTheText = (lan) => {
    checkInternetPEl.innerText = lan.checkInternetP;
-   sloganPEl.innerText = lan.slogan;
+   sloganH1El.innerText = lan.slogan;
+}
+
+const removeEffects = () => {
+    setTimeout(() => {
+        allElements.forEach((element) => {
+   element.classList.remove("fadeInSlow");
+   element.classList.remove("fadeInFast");
+   element.classList.remove("fadeOutSlow");
+   element.classList.remove("fadeOutFast");
+   element.classList.remove("slideIntoPlace");
+   })
+}, 1000)
+}
+
+const setTheTheme = () => {
+    document.documentElement.style.setProperty("--body-color", `${themeIsLight ? "white" : "black"}`);
+    document.documentElement.style.setProperty("--special-color", `${themeIsLight ? "#0000" : "#fff0"}`)
 }
 
 const setTheTransitions = () => {
-
+// to be written . . .
 }
-
-setTheText(text[0])
-
 
 const image = new Image();
 image.src = backgroundImages[1].url;
+const image2 = new Image();
+image2.src = backgroundImages[0].url;
 
 setTimeout(() => {
     checkInternetPEl.classList.remove("hidden");
@@ -46,17 +68,26 @@ setTimeout(() => {
 }, 5000)
 
 image.onload = () => {
-    main.style.backgroundImage = `url(${image.src})`;
-    main.style.display = "block";
-    setTimeout(() => {
-        main.classList.add("fadeInSlow")
-    }, 1);
-    loaderDiv.classList.add("fadeOutFast");
-    loaderDiv.addEventListener("animationend", () => {
+    image2.onload = () => {
+      setTheTheme()
+      setTheText(currentLanIsEn ? text[0] : text[1]);
+      if (themeIsLight) main.style.backgroundImage = `url(${image.src})`;
+      else if (!themeIsLight) main.style.backgroundImage = `url(${image2.src})`
+      main.style.display = "block";
+      main.classList.add("fadeInSlow");
+      loaderDiv.classList.add("fadeOutFast");
+      loaderDiv.addEventListener("animationend", () => {
         loaderDiv.style.display = "none"
-    }, { once: true})
+      }, { once: true});
+      setTheTransitions();
+      removeEffects()
+    }
 };
 
 image.onerror = () => {
+    console.log("Failed to load the image")
+}
+
+image2.onerror = () => {
     console.log("Failed to load the image")
 }
