@@ -83,12 +83,12 @@ main {
     }
     to {
       opacity: 1;
-      transform: translateY(50px);
+      transform: translateY(0);
     }
   }
 
-  .sildeIntoPlace {
-    animation: slideIntoPlace 0.4s ease;
+  .slideIntoPlace {
+    animation: slideIntoPlace 0.5s ease;
   }
 
   .fadeOutSlow {
@@ -116,13 +116,33 @@ main {
     font-weight: bold;
     width: 250px;
     left: calc(50vw - 145px);
-    top: calc(50Vh - 50px) 
+    top: calc(50Vh - 50px);
+    color: var(--text-color);   
+  }
+  
+  #slogan{
+    margin: 25vh auto 0 auto;
+    text-align: center;
+    font-size: 100px;
+    font-family: Dancing Script;
+    color: var(--text-color);
   }
 
   #theme-btn {
-
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--text-color);
+    width: 100px;
+    height: 50px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 20px;
+    transition: transform 0.3 ease;
   }
 
-  @media (min-width: 1000px) {
-    
+  #theme-btn:hover {
+    transform: scale(1.1)
   }

@@ -7,7 +7,7 @@ const sloganH1El = document.getElementById("slogan");
 let currentLanIsEn = true;
 
 const changeThemeBtn = document.getElementById("theme-btn");
-let themeIsLight = false;
+let themeIsLight = true;
 
 const backgroundImages = [
    {
@@ -43,19 +43,16 @@ const removeEffects = () => {
    element.classList.remove("fadeInFast");
    element.classList.remove("fadeOutSlow");
    element.classList.remove("fadeOutFast");
-   element.classList.remove("slideIntoPlace");
+   element.classList.remove("slideIntoPlace")
    })
 }, 1000)
 }
 
-const setTheTheme = () => {
-    document.documentElement.style.setProperty("--body-color", `${themeIsLight ? "white" : "black"}`);
-    document.documentElement.style.setProperty("--special-color", `${themeIsLight ? "#0000" : "#fff0"}`)
+const setTheTransitions = () => {
+   sloganH1El.classList.add("slideIntoPlace");
 }
 
-const setTheTransitions = () => {
-// to be written . . .
-}
+setTheText(currentLanIsEn ? text[0] : text[1]);
 
 const image = new Image();
 image.src = backgroundImages[1].url;
@@ -69,15 +66,11 @@ setTimeout(() => {
 
 image.onload = () => {
     image2.onload = () => {
-      setTheTheme()
-      setTheText(currentLanIsEn ? text[0] : text[1]);
-      if (themeIsLight) main.style.backgroundImage = `url(${image.src})`;
-      else if (!themeIsLight) main.style.backgroundImage = `url(${image2.src})`
-      main.style.display = "block";
+      main.classList.remove("hidden");
       main.classList.add("fadeInSlow");
       loaderDiv.classList.add("fadeOutFast");
       loaderDiv.addEventListener("animationend", () => {
-        loaderDiv.style.display = "none"
+        loaderDiv.classList.add("hidden")
       }, { once: true});
       setTheTransitions();
       removeEffects()
@@ -91,3 +84,17 @@ image.onerror = () => {
 image2.onerror = () => {
     console.log("Failed to load the image")
 }
+
+const setTheTheme = () => {
+    document.documentElement.style.setProperty("--body-color", `${themeIsLight ? "white" : "black"}`);
+    document.documentElement.style.setProperty("--special-color", `${themeIsLight ? "#0000" : "#fff0"}`);
+    document.documentElement.style.setProperty("--text-color", `${themeIsLight ? "black" : "beige"}`);
+    main.style.backgroundImage = `url(${themeIsLight ? image.src : image2.src})`;
+}
+
+setTheTheme()
+
+changeThemeBtn.addEventListener("click", () => {
+    themeIsLight = false;
+    setTheTheme();
+})
