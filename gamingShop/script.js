@@ -45,7 +45,7 @@ const removeEffects = () => {
    element.classList.remove("fadeOutFast");
    element.classList.remove("slideIntoPlace")
    })
-}, 1000)
+}, 500)
 }
 
 const setTheTransitions = () => {
@@ -90,11 +90,14 @@ const setTheTheme = () => {
     document.documentElement.style.setProperty("--special-color", `${themeIsLight ? "#0000" : "#fff0"}`);
     document.documentElement.style.setProperty("--text-color", `${themeIsLight ? "black" : "beige"}`);
     main.style.backgroundImage = `url(${themeIsLight ? image.src : image2.src})`;
+    changeThemeBtn.innerText = themeIsLight ? "light" : "dark"
 }
 
 setTheTheme()
 
 changeThemeBtn.addEventListener("click", () => {
-    themeIsLight = false;
+    themeIsLight ? themeIsLight = false : themeIsLight = true;
     setTheTheme();
+    setTheTransitions();
+    removeEffects()
 })
